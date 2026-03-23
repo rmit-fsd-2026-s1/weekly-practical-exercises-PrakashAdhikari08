@@ -12,11 +12,15 @@ let studentList = [
     localStorage.setItem("studentList", JSON.stringify(studentList));
  }
 
- export function getData () {
-    let studentList : Student[] = null;
-    studentList = localStorage.getItem("studentList");
-    JSON.parse(studentList);
-    return studentList;
- }
+ export function getData(): Student[] {
+  const raw = localStorage.getItem("studentList");
+  if (!raw) return [];
+
+  try {
+    return JSON.parse(raw) as Student[];
+  } catch {
+    return [];
+  }
+}
 
  export default loadData;
