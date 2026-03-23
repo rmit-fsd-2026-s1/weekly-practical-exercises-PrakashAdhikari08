@@ -21,6 +21,8 @@ export default function Home() {
 
   const [studentList, setStudentList] = useState<Student[]>([]);
 
+  const [showButton, setShowButton] = useState<boolean>(true);
+
   useEffect(() => {
     loadData();
   }, [])
@@ -37,7 +39,7 @@ export default function Home() {
 
         </div>
         <Link href="/loginForm">Login</Link>
-        <Link href={"/contact"}> Contact</Link>
+        {showButton ? (<Link href={"/contact"}> Contact</Link>) : (<> </>) }
       </main>
     </div>
   );
