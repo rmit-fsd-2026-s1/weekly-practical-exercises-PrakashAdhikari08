@@ -1,50 +1,82 @@
+import {background,Button, Input, FormLabel , FormControl} from "@chakra-ui/react";
+import {useState} from "react";
+import Link from "next/link";
 
 export default function Login(){
 
-    const handleChangeUserName =(e)=> {
-        //event.preventDefault()
-        console.log(e.target.value);
+    type loginDetails = {
+        username : string,
+        password : string
     }
 
-    const handleChangePw =(e) => {
-        console.log(e.target.value)
-    }
+    const [loginDetails, setLoginDetails] = useState<loginDetails>({username : "", password : ""});
 
-    const handleSubmit =(event) => {
+    // const handleChangeUserName =( event : React.ChangeEvent<HTMLInputElement>)=> {
+    //     event.preventDefault()
+    //     console.log(event.target.value);
+    //     setUserName(event.target.value);
+    // }
+
+    // const handleChangePw =(event :  React.ChangeEvent<HTMLInputElement>) => {
+    //     event.preventDefault();
+    //     console.log(event.target.value);
+    //     setPassword(event.target.value);
+    // }
+    const handleChange = (event : React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
+        setLoginDetails((prevState) => ({
+            ...prevState,
+            [event.target.name] : event.target.value
+        }));
+        // console.log(loginDetails);
+
+    }
+
+    const handleSubmit = (event: Event | undefined) => {
+        // @ts-ignore
+        event.preventDefault();
+        console.log("submitting");
+        console.log(loginDetails.username);
+        console.log(loginDetails.password);
+
         //compare username and password
         //if correct login else wrong pw
 
-        console.log("hello")
 
     }
+    // @ts-ignore
     return(
         <>
             <form >
                 <div>
-                    <label htmlFor="username">Username:</label>
-                    <input
+                    <FormControl isRequired>
+                    <FormLabel htmlFor="username">Username:</FormLabel>
+                    <Input
                         type="text"
                         id="username"
                         name="username"
-                        onChange={ handleChangeUserName}
+                        onChange={ handleChange}
                         required
                     />
+                    </FormControl>
                 </div>
                 <div>
-                    <label htmlFor="password">Password:</label>
-                    <input
+                    <FormControl isRequired={true}>
+                    <FormLabel htmlFor="password">Password:</FormLabel>
+                    <Input
                         type="password"
                         id="password"
                         name="password"
                         required
-                        onChange={handleChangePw}
+                        onChange={handleChange}
                     />
+                    </FormControl>
                 </div>
-                <button
-                onSubmit={handleSubmit}>Log In</button>
+                <Button className={ "accent-blue-950 " } colorScheme={"blue"} onClick={() => {handleSubmit (event)} } >Log In</Button>
+               <Link href={"/"} >
+               <Button colorScheme={"red"} >Cancel</Button>
+               </Link>
             </form>
-
         </>
     )
 }
