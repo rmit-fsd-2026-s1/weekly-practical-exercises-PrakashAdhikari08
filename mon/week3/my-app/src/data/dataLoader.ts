@@ -2,6 +2,7 @@ import Student from "@/data/student.data";
 
 let studentList = [
     {"firstName" : "Jack","lastName" : "Stringer", "loggedIn" : true, "email": ""},
+
     {"firstName" : "Will","lastName" : "Stringer", "loggedIn" : true, "email": "will@email.com"},
     {"firstName" : "Bobby","lastName" : "Hill", "loggedIn" : true, "email": "bobby@rmit.edu.au"},
     {"firstName" : "Jacky","lastName" : "Chen", "loggedIn" : true, "email": "chen@email.com"},
