@@ -1,27 +1,26 @@
 import {background,Button, Input, FormLabel , FormControl} from "@chakra-ui/react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Link from "next/link";
+import Student from "@/data/student.data";
+import {getData} from "@/data/dataLoader";
+import {toast, ToastContainer} from "react-toastify";
+import {useRouter} from "next/navigation";
 
 export default function Login(){
+    const router = useRouter();
 
     type loginDetails = {
         username : string,
         password : string
     }
 
+
     const [loginDetails, setLoginDetails] = useState<loginDetails>({username : "", password : ""});
+    const [users, setUsers] = useState<Student[]>();
 
-    // const handleChangeUserName =( event : React.ChangeEvent<HTMLInputElement>)=> {
-    //     event.preventDefault()
-    //     console.log(event.target.value);
-    //     setUserName(event.target.value);
-    // }
-
-    // const handleChangePw =(event :  React.ChangeEvent<HTMLInputElement>) => {
-    //     event.preventDefault();
-    //     console.log(event.target.value);
-    //     setPassword(event.target.value);
-    // }
+    useEffect(() => {
+         setUsers(getData());
+    }, []);
     const handleChange = (event : React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         setLoginDetails((prevState) => ({
@@ -35,12 +34,18 @@ export default function Login(){
     const handleSubmit = (event: Event | undefined) => {
         // @ts-ignore
         event.preventDefault();
-        console.log("submitting");
-        console.log(loginDetails.username);
-        console.log(loginDetails.password);
-
+        console.log(users);
+        //write logic to compare email and password
+        users?.forEach((user) => {
+            if(user.email === loginDetails.username && user.password === loginDetails.password) {
+                router.push("/addstudent");
+            }
+        })
+        console.log("login failed");
+        toast.error("Login failed");
         //compare username and password
         //if correct login else wrong pw
+
 
 
     }
@@ -49,6 +54,8 @@ export default function Login(){
         <>
             <form >
                 <div>
+                    <ToastContainer />
+
                     <FormControl isRequired>
                     <FormLabel htmlFor="username">Username:</FormLabel>
                     <Input

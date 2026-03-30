@@ -5,6 +5,7 @@ import Student from "@/data/student.data";
 import loadData, {getData} from "@/data/dataLoader";
 import Login from "@/pages/loginForm";
 import Link from "next/link";
+import {Button, ButtonGroup} from "@chakra-ui/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,10 +23,15 @@ export default function Home() {
   const [studentList, setStudentList] = useState<Student[]>([]);
 
   const [showButton, setShowButton] = useState<boolean>(true);
+  const [count, setCount ] = useState<number>(0);
 
+  // @ts-ignore
   useEffect(() => {
     loadData();
-  }, [])
+  }
+  ,[count]);
+
+  const refreshData = () => {}
 
   return (
  <div
@@ -40,7 +46,13 @@ export default function Home() {
         </div>
         <Link href="/loginForm">Login</Link>
         {showButton ? (<Link href={"/contact"}> Contact</Link>) : (<> </>) }
-      </main>
-    </div>
+   {/*<ButtonGroup gap={4}>*/}
+   {/*  <Button colorScheme="blue" onClick={()=> setCount(count + 1)}>Count</Button>*/}
+   {/*</ButtonGroup>*/}
+
+  </main>
+ </div>
+
+
   );
 }
