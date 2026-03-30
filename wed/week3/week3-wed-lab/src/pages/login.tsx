@@ -59,6 +59,9 @@ export default function Login() {
      // toast.error("Login failed");
  }
     // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
     return(
         <FormControl className={"login-form"} >
             <ToastContainer />
@@ -67,11 +70,11 @@ export default function Login() {
             <FormLabel>Enter your password</FormLabel>
             <Input type = "password" name = {"password"} onChange={handleChange}/>
 
-            {showButton ? (<ButtonGroup gap={4} mt={4}>
-                <Button colorScheme={"blue"} onClick={ (e)=> handleLogin(event)} >Login</Button>
+            {showButton ? <ButtonGroup gap={4} mt={4}>
+                <Button colorScheme={"blue"} onClick={ (e)=> handleLogin()} >Login</Button>
                 <Button colorScheme={"red"}>Cancel</Button>
 
-            </ButtonGroup>): (<></>)  }
+            </ButtonGroup>: <></>  }
 
         </FormControl>
     );

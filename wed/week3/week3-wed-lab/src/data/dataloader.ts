@@ -14,7 +14,8 @@ let users  = [
     localStorage.setItem("users", JSON.stringify(users));
 }
  export function getData () {
-    let users !: [User] = JSON.parse(localStorage.getItem("users"));
+    // @ts-ignore
+     let users !: [User] = JSON.parse(<string>localStorage.getItem("users"));
     return users;
  }
 export default loadData;

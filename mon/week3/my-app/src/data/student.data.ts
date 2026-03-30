@@ -2,7 +2,8 @@ export default interface Student {
     firstName : string,
     lastName : string,
     loggedIn : boolean,
-    email ?: string
+    email : string,
+    password : string,
 }
  interface  Admin extends Student {
     role : string,
