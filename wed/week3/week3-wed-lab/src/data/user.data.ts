@@ -5,6 +5,3 @@ export  default interface User  {
     role : string,
     isLoggedIn : boolean
 };
- interface AdminUser extends User {
-    permission : [string]
- };

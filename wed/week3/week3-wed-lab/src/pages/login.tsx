@@ -30,8 +30,8 @@ export default function Login() {
      const hasLowerCase = /[a-z]/.test(password);
      const hasNumber = /\d/.test(password);
      const isLongEnough = password.length >= 8;
-
-     return hasUpperCase && hasLowerCase && hasNumber && isLongEnough;
+    return true;
+     // return hasUpperCase && hasLowerCase && hasNumber && isLongEnough;
  }
 
  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +40,7 @@ export default function Login() {
          [event.target.name] : event.target.value
      }));
  }
- const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
+ const handleLogin = () => {
      event.preventDefault();
      if(!validatePassword(loginDetails.password)) {
          toast.error("Password must contain at least 8 characters, one uppercase letter, one lowercase letter, and one number");
@@ -52,14 +52,14 @@ export default function Login() {
         if(user.username === loginDetails.username && user.password === loginDetails.password){
             // alert("login successful");
             toast.success("Login successful");
-            // setTimeout();
-            // router.push("/");
+            router.push("/venue");
         }
      });
      // toast.error("Login failed");
  }
-    // @ts-ignore
-    // @ts-ignore
+    const handleCancel = () => {
+     router.push("/");
+    }
     // @ts-ignore
     // @ts-ignore
     return(
@@ -71,8 +71,8 @@ export default function Login() {
             <Input type = "password" name = {"password"} onChange={handleChange}/>
 
             {showButton ? <ButtonGroup gap={4} mt={4}>
-                <Button colorScheme={"blue"} onClick={ (e)=> handleLogin()} >Login</Button>
-                <Button colorScheme={"red"}>Cancel</Button>
+                <Button colorScheme={"blue"} onClick={ ()=> handleLogin()} >Login</Button>
+                <Button colorScheme={"red"} onClick={()=> handleCancel()}>Cancel</Button>
 
             </ButtonGroup>: <></>  }
 
